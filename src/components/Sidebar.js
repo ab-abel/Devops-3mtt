@@ -1,7 +1,6 @@
 // src/components/Sidebar.js
 import React from 'react';
 import logo from '../images/logo.png'; 
-// import './Sidebar.css'; // Create this CSS file for sidebar styles
 
 const Sidebar = () => {
     return (
