@@ -5,12 +5,16 @@
 }
 
 body {
-  display: flex;
   height: 100vh;
   background-color: #E9EEED;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
 }
 
+/* for react layout */
+.app{
+  display: flex;
+}
 
 
 .sidebar {
@@ -45,7 +49,13 @@ button {
   border: none;
   text-align: left;
   font-size: large;
+  cursor: pointer;
 }
+
+button:hover{
+  background-color:#29582b; 
+}
+
 .fa-qrcode {
   margin-right: 1rem;
   margin-left: .1rem;
@@ -73,10 +83,13 @@ a {
   color: #777;
 }
 
+a:hover {
+  color: #26a65b;
+}
 /* content styles */
 .content {
   margin: 25px;
-  width: 100%;
+  width: 80%;
   /* border: 1px solid red; */
 }
 
@@ -129,7 +142,7 @@ hr{
   z-index: 2; 
   /* border: 1px solid rgb(153, 71, 51); */
   margin-bottom: 100px;
-  width: 80%;
+  width: 70%;
   /* float:left; */
 }
 
@@ -155,7 +168,7 @@ color: #ffffff;
 }
 
 /* sutend details */
-.sudent-details{
+.student-details{
   display: flex;
   /* border: 1px solid red; */
   flex-direction: row;
@@ -173,6 +186,7 @@ color: #ffffff;
   padding: 1.5rem;
   color:#fff;
   display: flex;
+  /* flex-direction: row; */
   align-items: center;  
 }
 
@@ -219,54 +233,3 @@ color: #ffffff;
   padding-top: .5rems;
   padding-bottom: .5rem;
 }
-
-
-
-/* .student-info {
-  position: relative;
-  margin-top: -50px;  
-}
-
-.student-image {
-  width: 100px;  
-  height: auto;
-  position: relative;
-  z-index: 2;  
-} */
-/* 
-.sidebar-links {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 20px;
-  width: 100%;
-}
-
-.sidebar-links li {
-  padding: 10px;
-  text-align: center;
-  cursor: pointer;
-  background-color: #26a65b;
-  transition: background-color 0.3s;
-}
-
-.sidebar-links li:hover {
-  background-color: #34495e;  
-}
-
-.content {
-  flex-grow: 1;
-  background-color:#f0f0f0;
-  position: relative;
-  padding: 20px;
-}
-
-.header {
-  background-color: #3498db;
-  color: white;
-  padding: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-
-*/
