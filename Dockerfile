@@ -23,12 +23,13 @@ FROM nginx:alpine
 
 # copy the build in to the nginx directory
 COPY --from=build /app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose http port 80
 EXPOSE 80
 
 #run the app using nginx
-CMD ["nginx", "-g", "deamon off;" ]
+CMD ["nginx", "-g", "daemon off;" ]
 
 
 # Docker build the image with
