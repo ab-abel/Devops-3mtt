@@ -1,0 +1,9 @@
+# simple workflow to test github actions
+on: Push
+
+jobs:
+  first-job:
+    runs-on: windows-latest
+    steps:
+      - run: node --version
+      - run: npm --version
