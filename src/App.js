@@ -9,6 +9,25 @@ import CourseDetails from './components/CourseDetails';
 import './App.css'; 
 
 
+const App = () => {
+  return (
+    <div className="app">
+      <Sidebar />
+      <div className="content">
+          <Header />
+          <StudentWelcome />
+          <StudentInfo />
+          <StudentDetails />
+          <CourseDetails />
+      </div>
+    </div>
+  );
+};
+
+export default App;
+
+
+
 
 
 
