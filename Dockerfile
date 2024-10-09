@@ -29,3 +29,10 @@ EXPOSE 80
 
 #run the app using nginx
 CMD ["nginx", "-g", "deamon off;" ]
+
+
+# Docker build the image with
+# docker build -t my-3mtt-dashboard .
+
+#run the final build with 
+# docker run -p 3000:80 my-3mtt-dashboard
