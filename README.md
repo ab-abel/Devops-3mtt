@@ -20,4 +20,5 @@ This project is a simple demo on what learn so far while undergoing 3MTT trainin
 
 ### run the build image
     - docker run -p 3000:80 my-3mtt-dashboard
+    - Open http://localhost:3000 to view it in your browser.
     
