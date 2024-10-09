@@ -16,7 +16,7 @@ body {
   display: flex;
 }
 
-
+/* Side bar styles starts hear */
 .sidebar {
   width: 350px;
   background-color: #ffffff;
@@ -86,6 +86,10 @@ a {
 a:hover {
   color: #26a65b;
 }
+
+/* Side bar ends here */
+
+
 /* content styles */
 .content {
   margin: 25px;
