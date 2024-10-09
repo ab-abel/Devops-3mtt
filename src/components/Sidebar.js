@@ -1,11 +1,12 @@
 // src/components/Sidebar.js
 import React from 'react';
-import './Sidebar.css'; // Create this CSS file for sidebar styles
+import logo from '../images/logo.png'; 
+// import './Sidebar.css'; // Create this CSS file for sidebar styles
 
 const Sidebar = () => {
     return (
         <div className="sidebar">
-            <img src="logo.png" alt="Logo" className="logo" />
+            <img src={logo} alt="Logo" className="logo" />
             <button><i className="fas fa-qrcode"></i>Dashboard</button>
             <ul className="sidebar-links">
                 <li><i className="fas fa-user"></i><a href="#">Profile</a></li>
