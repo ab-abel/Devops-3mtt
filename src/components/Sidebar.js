@@ -8,7 +8,7 @@ const Sidebar = () => {
             <img src={logo} alt="Logo" className="logo" />
             <button><i className="fas fa-qrcode"></i>Dashboard</button>
             <ul className="sidebar-links">
-                <li><i className="fas fa-user"></i><a href="https://github.com/ab-abel/Devops-3mtt" target="_blank">Profile</a></li>
+                <li><i className="fas fa-user"></i><a href="https://github.com/ab-abel/Devops-3mtt" target="_blank" rel="noopener noreferrer">Profile</a></li>
                 <li><i className="fas fa-users"></i><a href="https://github.com/ab-abel/Devops-3mtt">Community</a></li>
                 <li><i className="fas fa-book"></i><a href="https://github.com/ab-abel/Devops-3mtt">My Courses</a></li>
                 <li><i className="fas fa-calendar-check"></i><a href="https://github.com/ab-abel/Devops-3mtt">ALC Attendance</a></li>
