@@ -11,12 +11,12 @@ body {
 
 }
 
-/* for react layout */
+/*********************** for react layout **********************************/
 .app{
   display: flex;
 }
 
-/* Side bar styles starts hear */
+/*********************** Side bar styles starts hear ***********************/
 .sidebar {
   width: 350px;
   background-color: #ffffff;
@@ -87,36 +87,32 @@ a:hover {
   color: #26a65b;
 }
 
-/* Side bar ends here */
+/*********************** Side bar ends here ***********************/
 
 
-/* content styles */
+/*********************** Main container codes strats here ***********************/
 .content {
   margin: 25px;
   width: 80%;
-  /* border: 1px solid red; */
 }
 
-/* header  */
+/*********************** header starts ***********************/
 .header {
-  /* background-color: #3498db; */
-  /* color: white; */
-  /* padding: 20px; */
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: center; /* Center the content vertically */
-  justify-content: flex-start; /* Align items to the start */
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .menu-icon {
-  margin-right: 25px; /* Space between icon and title */
-  cursor: pointer; /* Change cursor to pointer */
-  font-size: 24px; /* Adjust icon size as needed */
+  margin-right: 25px;
+  cursor: pointer;
+  font-size: 24px;
 }
 
-/* horizontal line */
 
+/********************** horizontal line **********************/
 hr{
   border: none;
   height: 1.5px;
@@ -124,40 +120,35 @@ hr{
   width: 100%;
   margin: 2rem 0;
 }
+/********************** horizontal line  ends**********************/
 
-/*  dashboard welcome page */
-
+/**********************  dashboard welcome content starts **********************/
 .student-welcome{
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
   align-items: center;
   color: #f0f0f0;
   background: linear-gradient(to left, #29582b, #26a65b,#29582b);
-  /* position: relative; */
   border-radius: .5rem;
   padding: 3rem 1.5rem;
 }
-
 
 .student-image {
   float: end;
   position: absolute;
   z-index: 2; 
-  /* border: 1px solid rgb(153, 71, 51); */
   margin-bottom: 100px;
   width: 70%;
-  /* float:left; */
 }
 
 .student-image img{
   width: 350px;
-  /* position: absolute;
-  z-index: 2;  */
    margin-left: 60%;
 }
+/********************** Welcome content end **********************/
 
-/* info page */
+
+/********************** info Alert **********************/
 .student-info {
   padding: .5rem 1.5rem;
   background-color: #F75A5B;
@@ -170,27 +161,23 @@ hr{
 text-decoration: underline;
 color: #ffffff;
 }
+/************************** Info alerts ends ***************************/
 
-/* sutend details */
+
+/*************************** student details ****************************/
 .student-details{
   display: flex;
-  /* border: 1px solid red; */
   flex-direction: row;
   justify-content: space-between;
-  /* width: 80%; */
-
 }
-
 
 .students {
   background-color: #21262e;
-  /* border: 1px solid red; */
   width: 32%;
   border-radius: .5rem;
   padding: 1.5rem;
   color:#fff;
   display: flex;
-  /* flex-direction: row; */
   align-items: center;  
 }
 
@@ -205,14 +192,13 @@ color: #ffffff;
 .students:last-child{
   background-color: #f87329;
 }
+/****************** Student details Ends *******************/
 
-/* sutend details */
+/********************** course details ********************/
 .course-details{
   display: flex;
-  /* border: 1px solid red; */
   flex-direction: row;
   justify-content: space-between;
-
 }
 
 .course {
@@ -223,7 +209,6 @@ color: #ffffff;
   color:#777;
   margin: 1rem 0;
   text-align: left;
-
 }
 
 .course h2, p {
@@ -237,3 +222,4 @@ color: #ffffff;
   padding-top: .5rems;
   padding-bottom: .5rem;
 }
+/********************** course details ends ********************/
