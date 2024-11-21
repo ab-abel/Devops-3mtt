@@ -27,3 +27,40 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+
+  terraform:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: action/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.5.7
+
+    - name: Autheticate with GCP
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+      run: |
+        echo "${GOOGLE_CREDENTIALS}" > $HOME/gcp-key.json
+        gcloud auth activate-service-account --key-file=$HOME/gcp-key.json
+        gcloud config set project your-gcp-project-id
+    
+    - name: Initialize Terraform
+      run: terraform init
+    
+    - name: Terraform Format Check
+      run: terraform fmt -check
+    
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan
+    
+    - name: Terraform Apply
+      if: github.event_name == 'push'
+      run: terraform apply -auto-approve tfplan
