@@ -15,7 +15,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        # node-version: [18.x, 20.x, 22.x]
+        node-version: [22.x]
 
     steps:
     - uses: actions/checkout@v4
@@ -34,7 +35,7 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: action/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
@@ -45,11 +46,18 @@ jobs:
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
       run: |
-        echo "${GOOGLE_CREDENTIALS}" > $HOME/gcp-key.json
+        echo "${GCP_CREDENTIALS}" > $HOME/gcp-key.json
+        export GOOGLE_APPLICATION_CREDENTIALS=$HOME/gcp-key.json
         gcloud auth activate-service-account --key-file=$HOME/gcp-key.json
-        gcloud config set project your-gcp-project-id
+        gcloud config set project ${{secrets.PROJECT_ID}}
     
     - name: Initialize Terraform
+      env:
+          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcp-key.json
+          TF_VAR_project_id: ${{secrets.PROJECT_ID}}
+          TF_VAR_region: us-central1
+          TF_VAR_zone: us-central1-a
+
       run: terraform init
     
     - name: Terraform Format Check
