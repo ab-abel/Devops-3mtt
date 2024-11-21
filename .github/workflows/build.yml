@@ -48,6 +48,7 @@ jobs:
       run: |
         echo "${GCP_CREDENTIALS}" > $HOME/gcp-key.json
         export GOOGLE_APPLICATION_CREDENTIALS=$HOME/gcp-key.json
+        cat $HOME/gcp-key.json
         gcloud auth activate-service-account --key-file=$HOME/gcp-key.json
         gcloud config set project ${{secrets.PROJECT_ID}}
     
