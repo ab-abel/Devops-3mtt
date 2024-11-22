@@ -26,7 +26,4 @@ resource "aws_instance" "default" {
     Name = var.ec2_name
   }
 }
-output "instance_ip" {
-  description = "The public IP address of the EC2 instance"
-  value       = aws_instance.default.public_ip
-}
+
