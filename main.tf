@@ -2,12 +2,25 @@ provider "aws" {
   region = var.aws_region
 }
 
+data "aws_ami" "ubuntu" {
+    most_recent = true
+    filter {
+            name   = "name"
+            values = ["ubuntu/images/hvm-ssd/*20.04-amd64-server-*"]
+        }
+    filter {
+            name   = "virtualization-type"
+            values = ["hvm"]
+        }
+    owners = ["523116690312"] # Canonical
+}
+
 resource "aws_instance" "default" {
-  ami           = "ami-0c55b159cbfafe1f0"
+  ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
   key_name      = var.key_name
   tags = {
-    Name = "ExampleInstance"
+    Name = "3mttInstance"
   }
 
   # Optionally, you can use user_data to configure your instance on boot
