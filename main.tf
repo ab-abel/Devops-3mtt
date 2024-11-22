@@ -16,7 +16,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "default" {
-  ami           = data.aws_ami.ubuntu.id
+  ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.micro"
   key_name      = var.key_name
   tags = {
