@@ -23,6 +23,8 @@ resource "aws_instance" "default" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
   key_name      = var.key_name
+  vpc_security_group_ids = ["sg-0049869989aecfc10","sg-02e089c40be1dbe5e"]
+  subnet_id = "subnet-01f56420769487d2f"
   tags = {
     Name = var.ec2_name
   }
