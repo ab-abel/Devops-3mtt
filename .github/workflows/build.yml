@@ -46,5 +46,5 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/my3mttApp:latest
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/3mtt:latest
   
