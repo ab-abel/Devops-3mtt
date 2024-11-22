@@ -2,19 +2,6 @@ provider "aws" {
   region = var.aws_region
 }
 
-data "aws_ami" "ubuntu" {
-    most_recent = true
-    filter {
-            name   = "name"
-            values = ["ubuntu/images/hvm-ssd/*20.04-amd64-server-*"]
-        }
-    filter {
-            name   = "virtualization-type"
-            values = ["hvm"]
-        }
-    owners = ["523116690312"] # Canonical
-}
-
 resource "aws_instance" "default" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.micro"
