@@ -27,7 +27,13 @@ resource "aws_instance" "default" {
   subnet_id = "subnet-01f56420769487d2f"
   associate_public_ip_address = true
   
-
+  connection {
+    type      = "ssh"
+    user      = "ubuntu"
+    private_key = file('~/.ssh/app-ssh-key.pem')
+    host        = self.public_ip
+  }
+  
   provisioner "remote-exec" {
     inline = [
       "sudo apt update",
