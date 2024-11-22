@@ -23,9 +23,9 @@ resource "aws_instance" "default" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
   key_name      = var.key_name
-  ecs_associate_public_ip_address = "true"
   vpc_security_group_ids = ["sg-0049869989aecfc10","sg-02e089c40be1dbe5e"]
   subnet_id = "subnet-01f56420769487d2f"
+  associate_public_ip_address = true
   
 
   provisioner "remote-exec" {
