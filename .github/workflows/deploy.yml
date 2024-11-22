@@ -1,10 +1,12 @@
 name: deploy to Ec2
 
 on:
-  workflow_run:
-    workflows: ["3MTT App CI"]
-    types:
-     - completed
+    pull_request:
+        branches: ["Main"]
+#   workflow_run:
+#     workflows: ["3MTT App CI"]
+#     types:
+#      - completed
 
 jobs:
     deploy-ec2-terraform:
