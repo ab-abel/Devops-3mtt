@@ -1,12 +1,12 @@
 name: deploy to Ec2
 
 on:
-    pull_request:
-        branches: ["Main"]
-#   workflow_run:
-#     workflows: ["3MTT App CI"]
-#     types:
-#      - completed
+    # pull_request:
+    #     branches: ["Main"]
+  workflow_run:
+    workflows: ["3MTT App CI"]
+    types:
+     - completed
 
 jobs:
     deploy-ec2-terraform:
@@ -48,16 +48,3 @@ jobs:
           echo "${{ secrets.AWS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           echo "Private key configured"
-
-
-# run-docker-image:
-    #     needs: [deploy-ec2-terraform]
-    #     runs-on: self-hosted
-    #     steps: 
-    #     - name: Pull Docker Image
-    #       run: sudo docker pull ${{secrets.DOCKERHUB_USERNAME}}/3mtt:latest
-    #     - name: Delete old Docker Container
-    #       run: sudo docker rm -f 3mtt-container || true
-    #     - name: Run Docker container
-    #       run: sudo docker run -d -p 8080:8080 elated205/3mtt:latest 
-      
