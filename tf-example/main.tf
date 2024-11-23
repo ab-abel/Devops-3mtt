@@ -30,7 +30,7 @@ resource "aws_instance" "default" {
   connection {
     type      = "ssh"
     user      = "ubuntu"
-    private_key = file('~/.ssh/app-ssh-key.pem')
+    private_key = file(var.private_key_path)
     host        = self.public_ip
   }
   

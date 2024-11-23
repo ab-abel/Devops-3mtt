@@ -14,3 +14,6 @@ variable "ec2_name" {
   type        = string
 }
 
+variable "private_key_path" {
+  default = "/home/ubuntu/.ssh/app-ssh-key.pem"
+}
