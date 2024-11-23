@@ -15,5 +15,5 @@ variable "ec2_name" {
 }
 
 variable "private_key_path" {
-  default = "/home/ubuntu/.ssh/id-rsa"
+  default = "/home/ubuntu/.ssh/app-ssh-key.pem"
 }
