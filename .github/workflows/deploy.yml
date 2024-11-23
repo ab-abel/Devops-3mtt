@@ -32,6 +32,12 @@ jobs:
         with:
           terraform_wrapper: false
 
+      - name: Configure SSH Key
+        run: |
+          echo "${{ secrets.AWS_PRIVATE_KEY }}" > ~/.ssh/id_rsa/app-ssh-key.pem
+          chmod 600 ~/.ssh/id_rsa
+          echo "Private key configured"
+
       - name: Terraform Apply
         id:   apply
         env:
@@ -42,9 +48,3 @@ jobs:
           terraform validate
           terraform plan 
           terraform apply -auto-approve
-
-      - name: Configure SSH Key
-        run: |
-          echo "${{ secrets.AWS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          echo "Private key configured"
