@@ -1,19 +1,23 @@
-variable "aws_region" {
-  description = "The AWS region"
-  default     = "us-east-1"  # Update this as needed
-}
-
-variable "key_name" {
-  description = "The name of the key pair to use for SSH access"
+variable "project_id" {
   type        = string
-  default     = "app-ssh-key"  # Replace with your actual SSH key name if needed
+  description = "Project ID"
 }
 
-variable "ec2_name" {
-  description = "The name of machine"
+variable "repo_name" {
   type        = string
+  description = "Artifact Registry repo name"
 }
 
-variable "private_key_path" {
-  default = "/home/ubuntu/.ssh/app-ssh-key.pem"
+variable "location" {
+  type        = string
+  description = "Artifact Registry repo location"
+}
+
+variable "image_name" {
+  type        = string
+  description = "Docker Image name"
+}
+
+variable "image_tag" {
+  type = string
 }
