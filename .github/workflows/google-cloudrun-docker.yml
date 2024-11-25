@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: ${{ vars.PROJECT_ID }} # Update with your Google Cloud project ID
   REGION: ${{ vars.LOCATION }} # Update with your region
-  SERVICE: 'my-service' # Update with your service name
+  SERVICE: 'capstone-repo' # Update with your service name
 
 jobs:
   deploy:
