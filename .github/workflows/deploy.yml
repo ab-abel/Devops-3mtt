@@ -36,12 +36,18 @@ jobs:
           
       - name: Build and Push Docker image to GCR
         run: |
-          docker build -t us-docker.pkg.dev/${{ env.PROJECT_ID }}/YOUR_REPO_NAME/IMAGE_NAME:${{ github.sha }} .
-          docker push us-docker.pkg.dev/${{ env.PROJECT_ID }}/YOUR_REPO_NAME/IMAGE_NAME:${{ github.sha }}
+          docker build -t us-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
+          docker push us-docker.pkg.dev/${{ env.PROJECT_ID }}/Y${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
       
       - name: Deploy to Cloud Run
         run: |
           terraform init -input=true
           terraform state list
           terraform plan -var="image_tag=${{ github.sha }}"
-          terraform apply -var="image_tag=${{ github.sha }}" -auto-approve
+          terraform apply \
+          -var="project_id=${{ env.PROJECT_ID }}"\
+          -var="repo_name=${{ env.REPO_NAME }}"\
+          -var="location=${{ env.LOCATION }}"\
+          -var="image_name=${{ env.IMAGE_NAME }}"\
+          -var="image_tag=${{ env.github.sha }}"\          
+          -auto-approve
