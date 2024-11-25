@@ -8,7 +8,7 @@ on:
      - completed
 
 env:
-  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  PROJECT_ID: ${{ vars.PROJECT_ID }}
   SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_CREDENTIALS}}
 
 jobs:
@@ -36,8 +36,8 @@ jobs:
           
       - name: Build and Push Docker image to GCR
         run: |
-          docker build -t us-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
-          docker push us-docker.pkg.dev/${{ env.PROJECT_ID }}/Y${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          docker build -t us-docker.pkg.dev/${{ vars.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ vars.IMAGE_NAME }}:${{ github.sha }} .
+          docker push us-docker.pkg.dev/${{ vars.PROJECT_ID }}/Y${{ env.REPO_NAME }}/${{ vars.IMAGE_NAME }}:${{ github.sha }}
       
       - name: Deploy to Cloud Run
         run: |
@@ -45,9 +45,9 @@ jobs:
           terraform state list
           terraform plan -var="image_tag=${{ github.sha }}"
           terraform apply \
-          -var="project_id=${{ env.PROJECT_ID }}"\
-          -var="repo_name=${{ env.REPO_NAME }}"\
-          -var="location=${{ env.LOCATION }}"\
-          -var="image_name=${{ env.IMAGE_NAME }}"\
-          -var="image_tag=${{ env.github.sha }}"\          
+          -var="project_id=${{ vars.PROJECT_ID }}"\
+          -var="repo_name=${{ vars.REPO_NAME }}"\
+          -var="location=${{ vars.LOCATION }}"\
+          -var="image_name=${{ vars.IMAGE_NAME }}"\
+          -var="image_tag=${{ github.sha }}"\          
           -auto-approve
