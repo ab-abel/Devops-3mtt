@@ -2,12 +2,12 @@ name: 'Build and Deploy to Cloud Run'
 
 on:
   push:
-    branches:
-      - 'main' # Trigger on pushes to the main branch
+    branches: 
+      ["Main"] # Trigger on pushes to the main branch
 
 env:
-  PROJECT_ID: ${{ env.PROJECT_ID }} # Update with your Google Cloud project ID
-  REGION: ${{ env.LOCATION }} # Update with your region
+  PROJECT_ID: ${{ vars.PROJECT_ID }} # Update with your Google Cloud project ID
+  REGION: ${{ vars.LOCATION }} # Update with your region
   SERVICE: 'my-service' # Update with your service name
 
 jobs:
@@ -24,12 +24,12 @@ jobs:
       - name: 'Authenticate with Google Cloud'
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: '${{ GCP_CREDENTIALS }}'
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
       - name: 'Set Up gcloud CLI'
         uses: google-github-actions/setup-gcloud@v2
         with:
-          project_id: '${{ vars.PROJECT_ID }}'
+          project_id: '${{ env.PROJECT_ID }}'
 
       # Build and push the Docker image to Google Artifact Registry
       - name: 'Build and Push Docker Image'
