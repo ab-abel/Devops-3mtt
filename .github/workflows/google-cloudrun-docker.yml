@@ -47,7 +47,7 @@ jobs:
         run: |-
           echo "Deploying to Cloud Run..."
           gcloud run deploy "${{ env.SERVICE }}" \
-            --image "${{ env.SERVICE }}" \
+            --image gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:latest \
             --region "${{ env.REGION }}" \
             --allow-unauthenticated \
             --quiet
