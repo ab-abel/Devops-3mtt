@@ -34,8 +34,13 @@ jobs:
       # Build and push the Docker image to Google Artifact Registry
       - name: 'Build and Push Docker Image'
         run: |-
-          docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:latest .
-          docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:latest
+          DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:latest"
+          echo "Building Docker image..."
+          docker build -t "${DOCKER_TAG}" .
+          echo "Authenticating Docker with gcloud..."
+          gcloud auth configure-docker "${{ env.REGION }}-docker.pkg.dev" --quiet
+          echo "Pushing Docker image to Artifact Registry..."
+          docker push "${DOCKER_TAG}"
 
       # Deploy the container to Cloud Run
       - name: 'Deploy to Cloud Run'
@@ -43,7 +48,6 @@ jobs:
           echo "Deploying to Cloud Run..."
           gcloud run deploy "${{ env.SERVICE }}" \
             --image gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:latest \
-            --platform managed \
             --region "${{ env.REGION }}" \
             --allow-unauthenticated \
             --quiet
