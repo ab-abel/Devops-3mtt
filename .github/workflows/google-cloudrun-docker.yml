@@ -47,7 +47,7 @@ jobs:
         run: |-
           echo "Deploying to Cloud Run..."
           gcloud run deploy "${{ env.SERVICE }}" \
-            --image "${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ env.SERVICE }}:latest"
+            --image "${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ env.SERVICE }}:latest"\
             --region "${{ env.REGION }}" \
             --allow-unauthenticated \
             --quiet
