@@ -253,6 +253,7 @@ color: #ffffff;
   }
   .sudent-details{
       flex-direction: column;
+      width: 100%;
   }
   .student-image img{
       width: 150px;
