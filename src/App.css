@@ -255,11 +255,20 @@ color: #ffffff;
       flex-direction: column;
       width: 100%;
   }
+
+  .student-welcome{
+    padding: 2rem 1.5rem;
+  }
+  .student-image {
+    margin: 0;
+    padding: 0;
+  }
+
   .student-image img{
       width: 150px;
       /* position: absolute;
       z-index: 2;  */
        margin-left: 50%;
-       margin-top: 35%;
+       margin-top: 20%;
   }
 }
