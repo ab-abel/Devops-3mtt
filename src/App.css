@@ -223,3 +223,42 @@ color: #ffffff;
   padding-bottom: .5rem;
 }
 /********************** course details ends ********************/
+
+
+
+/*********************** Media Query for Larger Screens ***********************/
+@media (max-width: 768px) {
+  .app {
+      
+    flex-direction: column; 
+      }
+
+  .sidebar {
+   display: none;
+  }
+
+  .content {
+    width: 80%; /* Original content width */
+    margin: 25px;
+  }
+
+  /* .student-details{} */
+  .course-details {
+      flex-direction: column; 
+      width: 100%;
+  }
+  .students, .course, .header-image, .student-info {
+      width: auto;
+      margin: 10px;
+  }
+  .sudent-details{
+      flex-direction: column;
+  }
+  .student-image img{
+      width: 150px;
+      /* position: absolute;
+      z-index: 2;  */
+       margin-left: 50%;
+       margin-top: 35%;
+  }
+}
