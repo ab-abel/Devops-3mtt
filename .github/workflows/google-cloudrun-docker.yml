@@ -52,6 +52,7 @@ jobs:
             --region "${{ env.REGION }}" \
             --no-allow-unauthenticated \
             --max-instances=2\
+            --port=80\
             --quiet
 
       # Output the Cloud Run URL
