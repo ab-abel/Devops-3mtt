@@ -50,7 +50,7 @@ jobs:
           gcloud run deploy "${{ env.SERVICE }}" \
             --image "${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ env.SERVICE }}:${{ env.VERSION}}"\
             --region "${{ env.REGION }}" \
-            --no-allow-unauthenticated \
+            --allow-unauthenticated \
             --max-instances=2\
             --port=80\
             --quiet
