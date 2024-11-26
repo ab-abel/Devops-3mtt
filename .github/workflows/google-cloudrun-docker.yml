@@ -9,6 +9,7 @@ env:
   PROJECT_ID: ${{ vars.PROJECT_ID }} # Update with your Google Cloud project ID
   REGION: ${{ vars.LOCATION }} # Update with your region
   SERVICE: 'capstone-repo' # Update with your service name
+  VERSION: ${{ github.sha }}
 
 jobs:
   deploy:
@@ -34,7 +35,7 @@ jobs:
       # Build and push the Docker image to Google Artifact Registry
       - name: 'Build and Push Docker Image'
         run: |-
-          DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ env.SERVICE }}:${{ github.sha }}"
+          DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ env.SERVICE }}:${{ env.VERSION }}"
           echo "Building Docker image..."
           docker build -t "${DOCKER_TAG}" .
           echo "Authenticating Docker with gcloud..."
@@ -47,9 +48,10 @@ jobs:
         run: |-
           echo "Deploying to Cloud Run..."
           gcloud run deploy "${{ env.SERVICE }}" \
-            --image "${DOCKER_TAG}"\
+            --image "${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ env.SERVICE }}:${{ env.VERSION}}"\
             --region "${{ env.REGION }}" \
-            --allow-unauthenticated \
+            --no-allow-unauthenticated \
+            --max-instances=2\
             --quiet
 
       # Output the Cloud Run URL
