@@ -239,7 +239,7 @@ color: #ffffff;
 
   .content {
     width: 80%; /* Original content width */
-    margin: 25px;
+    margin: 10px;
   }
 
   /* .student-details{} */
@@ -249,7 +249,7 @@ color: #ffffff;
   }
   .students, .course, .header-image, .student-info {
       width: auto;
-      margin: 10px;
+      margin: 5px auto;
   }
   .student-details{
       flex-direction: column;
