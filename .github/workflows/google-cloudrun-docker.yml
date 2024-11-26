@@ -49,9 +49,7 @@ jobs:
           echo "Deploying to Cloud Run..."
           gcloud run deploy "${{ env.SERVICE }}" \
             --image "${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ env.SERVICE }}:${{ env.VERSION}}"\
-            --region "${{ env.REGION }}" \
-            --allow-unauthenticated \
-            --max-instances=2\
+            --region "${{ env.REGION }}" --allow-unauthenticated --max-instances=2\
             --port=80\
             --quiet
 
