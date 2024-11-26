@@ -34,7 +34,7 @@ jobs:
       # Build and push the Docker image to Google Artifact Registry
       - name: 'Build and Push Docker Image'
         run: |-
-          DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:latest"
+          DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ env.SERVICE }}:latest"
           echo "Building Docker image..."
           docker build -t "${DOCKER_TAG}" .
           echo "Authenticating Docker with gcloud..."
