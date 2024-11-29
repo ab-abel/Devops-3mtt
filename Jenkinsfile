@@ -52,7 +52,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker run -p 3000:80 $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:latest
+                    docker run -p 3000:3000 $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:latest
                     """
                 }
             }
