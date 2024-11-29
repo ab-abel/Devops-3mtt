@@ -1,56 +1,88 @@
-pipeline { 
+pipeline {
     agent any 
-    tools {
-        nodejs 'nodejs'
-        }
-    enviroment{
-        CLOUDSDK_CORE_PROJECT='PROJECT_ID'
-        CLIENT_EMAIL='IAM_EMAIL'
-        GCLOUD_CREDS='IAM_CREDS_JSON'
-        DOCKERHUB_CREDENTIALS = 'dockerHubCredentials'
+    tools {nodejs "NodeJS"}
+    environment {
+        PROJECT_ID = credentials('project_id')
+        REGION = credentials('region')
+        REPOSITORY = credentials('project_repo')
+        IMAGE_NAME = '3mtt-dashboard'
+        SERVICE_NAME = 'capstone-service'
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcloud-creds') // Jenkins credential ID for GCP
     }
+
     stages {
-        stage('Authenticate to Google Cloud'){
+
+        stage('Checkout') {
             steps {
-                sh '''
-                    gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
-                '''
+                git branch: 'Main', credentialsId: 'PAT_JENKINS', url: 'https://github.com/ab-abel/Devops-3mtt.git'
             }
         }
-        stage('Build'){
+
+        stage('Build React App') {
             steps {
-                sh '''
-                    npm install
-                    docker build -t capstone-3mtt .
-                    docker tag capstone-3mtt:latest elated205/3mtt:latest
-                '''
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
-        stage('Test'){
+
+        stage('Build Docker Image') {
             steps {
-                sh '''
-                    npm test
-                '''
-            }
-        }
-        stage('Deploy To Docker Hub') { 
-            steps { 
-                withCredentials([usernamePassword(credentialsId: 'DockerCred', passwordVariable: 'PASS', usernameVariable: 'USER')]){
-                    sh 'echo $PASS | docker login -u $USER --password-stdin'
-                    sh 'docker push elated205/3mtt:latest'
+                script {
+                    sh """
+                    docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:latest .
+                    """
                 }
             }
         }
-        stage('Deploy to cloud run') {
+
+        stage('Push to Artifact Registry') {
+            steps {
+                withCredentials([file(credentialsId: 'gcloud-creds', variable: 'GCLOUD_CREDS')]){
+                    
+                    sh '''
+                     gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
+                     gcloud auth configure-docker $REGION-docker.pkg.dev --quiet
+                     docker push $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:latest
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy to Staggin') {
+            steps {
+                script {
+                    sh """
+                    docker run -p 3000:80 $IMAGE_NAME
+                    """
+                }
+            }
+        }
+
+        stage('Deploy to Production') {
             input{
                 message "Click OK! to continue deployment?"
                 ok "OK"
             }
             steps {
-                sh '''
-                    gcloud run service replace service.yaml --platform='managed' --region='REGION'
-                '''
+                script {
+                    sh """
+                    gcloud run deploy $SERVICE_NAME \
+                        --image $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:latest \
+                        --region $REGION \
+                        --platform managed \
+                        --allow-unauthenticated --max-instances=2\
+                        --port=80\
+                        --quiet
+                    gcloud run services add-iam-policy-binding $SERVICE_NAME --region=$REGION --member='allUsers' --role='roles/run.invoker'
+                    """
+                }
             }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()  // Clean up the workspace after the build
         }
     }
 }
