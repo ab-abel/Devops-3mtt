@@ -3,8 +3,8 @@
 name: 3MTT App CI
 
 on:
-  push:
-    branches: ["Main"]
+  # push:
+  #   branches: ["Main"]
   pull_request:
     branches: ["Main"]
 

@@ -1,0 +1,17 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: capstone_proj
+spec:
+  template:
+    annotations:
+      autoscaling.knative.dev/minScale: 0
+      autoscaling.knative.dev/maxScale: 1
+
+    spec:
+      serviceAccountName: SERVICE_ACCOUNT_EMAIL
+      containers:
+      - image: us-docker.pkg.dev/${{ vars.PROJECT_ID }}/${{ vars.SERVICE }}/${{ vars.SERVICE }}:f609847656121567680c1960f334e77ae26ba152
+        ports:
+        - name: http1
+          containerPort: 80
