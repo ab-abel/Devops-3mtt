@@ -151,7 +151,8 @@ hr{
 /********************** info Alert **********************/
 .student-info {
   padding: .5rem 1.5rem;
-  background-color: #F75A5B;
+  /* background-color: #F75A5B; */
+  background-color: #26A65B;
   color: #fff;
   border-radius: .5rem;
   margin: 1rem 0;

@@ -13,16 +13,16 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
+        stage('Checkout, Build and Test 3MTT Dashboard') {
+            Steps {
                 git branch: 'Main', credentialsId: 'PAT_JENKINS', url: 'https://github.com/ab-abel/Devops-3mtt.git'
             }
-        }
-
-        stage('Build React App') {
             steps {
                 sh 'npm install'
                 sh 'npm run build'
+            }
+            steps {
+                sh 'npm test'
             }
         }
 
@@ -68,7 +68,7 @@ pipeline {
 
         stage('Deploy to Production') {
             input{
-                message "Click OK! to continue deployment?"
+                message "Click OK! To deploy to Production?"
                 ok "OK"
             }
             steps {
