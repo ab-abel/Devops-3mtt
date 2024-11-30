@@ -14,7 +14,7 @@ pipeline {
     stages {
 
         stage('Checkout, Build and Test 3MTT Dashboard') {
-            Steps {
+            steps {
                 git branch: 'Main', credentialsId: 'PAT_JENKINS', url: 'https://github.com/ab-abel/Devops-3mtt.git'
             }
             steps {
