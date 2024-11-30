@@ -60,7 +60,7 @@ pipeline {
                         --allow-unauthenticated --max-instances=2\
                         --port=80\
                         --quiet
-                    gcloud run services add-iam-policy-binding $SERVICE_NAME --region=$REGION --member='allUsers' --role='roles/run.invoker'
+                    gcloud run services add-iam-policy-binding $STAGGING_SERVER --region=$REGION --member='allUsers' --role='roles/run.invoker'
                     """
                 }
             }
