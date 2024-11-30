@@ -12,20 +12,18 @@ pipeline {
     }
 
     stages {
-
-        stage('Checkout, Build and Test 3MTT Dashboard') {
+        stage('Checkout, Build 3MTT Dashboard APP') {
             steps {
                 git branch: 'Main', credentialsId: 'PAT_JENKINS', url: 'https://github.com/ab-abel/Devops-3mtt.git'
-            }
-            steps {
                 sh 'npm install'
                 sh 'npm run build'
             }
+        }
+        stage('APP Testing') {
             steps {
                 sh 'npm test'
             }
         }
-
         stage('Build Docker Image') {
             steps {
                 script {
