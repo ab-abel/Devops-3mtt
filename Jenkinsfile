@@ -6,7 +6,8 @@ pipeline {
         REGION = credentials('region')
         REPOSITORY = credentials('project_repo')
         IMAGE_NAME = '3mtt-dashboard'
-        SERVICE_NAME = 'capstone-service'
+        SERVICE_NAME = 'capstone-prod'
+        STAGGING_SERVER = 'capstone-stage'
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcloud-creds') // Jenkins credential ID for GCP
     }
 
@@ -48,11 +49,18 @@ pipeline {
             }
         }
 
-        stage('Deploy to Staggin') {
+        stage('Deploy to Stagging Server') {
             steps {
                 script {
                     sh """
-                    docker run -p 3000:3000 $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:latest
+                    gcloud run deploy $STAGGING_SERVER \
+                        --image $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:latest \
+                        --region $REGION \
+                        --platform managed \
+                        --allow-unauthenticated --max-instances=2\
+                        --port=80\
+                        --quiet
+                    gcloud run services add-iam-policy-binding $SERVICE_NAME --region=$REGION --member='allUsers' --role='roles/run.invoker'
                     """
                 }
             }
